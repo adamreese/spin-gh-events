@@ -3,6 +3,7 @@ set -euo pipefail
 
 set -x
 
+endpoint="${ENDPOINT:?Must set ENDPOINT environment variable}"
 payload_file="${1:-testdata/ping.json}"
 event="${2:-ping}"
 

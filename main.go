@@ -20,8 +20,6 @@ func init() {
 		}
 		defer key_value.Close(store)
 
-		log.Print(key_value.GetKeys(store))
-
 		webhookSecretKey, err := key_value.Get(store, "webhookSecretKey")
 		if err != nil {
 			log.Print(err)
