@@ -48,7 +48,10 @@ func init() {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
+			// log the request
 			log.Printf("%v", event)
+
+			// add any other events to handle
 		}
 	})
 }
