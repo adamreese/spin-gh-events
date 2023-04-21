@@ -34,7 +34,10 @@ func init() {
 			return
 		}
 
-		switch github.WebHookType(r) {
+		webHookType := github.WebHookType(r)
+		log.Printf("Event received %q", webHookType)
+
+		switch webHookType {
 		case "ping":
 			log.Print("ping")
 			w.WriteHeader(http.StatusOK)
