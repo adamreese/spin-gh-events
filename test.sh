@@ -11,15 +11,13 @@ payload=$(<"${payload_file}")
 
 webhook_secret="$(<secret.txt)"
 
-webhook_signature=$(echo -n "$payload" | openssl sha1 -hmac "$webhook_secret" -binary | xxd -p)
-webhook_signature_256=$(echo -n "$payload" | openssl dgst -sha256 -hmac "$webhook_secret" -binary | xxd -p |tr -d '\n')
+webhook_signature=$(echo -n "${payload}" | openssl dgst -sha256 -hmac "${webhook_secret}" -binary | xxd -p |tr -d '\n')
 
 curl \
   --header "X-GitHub-Event: ${event}" \
   --header "X-GitHub-Delivery: nil" \
-  --header "X-Hub-Signature: sha1=$webhook_signature" \
-  --header "X-Hub-Signature-256: sha256=$webhook_signature_256" \
+  --header "X-Hub-Signature-256: sha256=${webhook_signature}" \
   --header "Content-Type: application/json" \
-  --data "$payload" \
+  --data "${payload}" \
   -L \
     "${endpoint}"
