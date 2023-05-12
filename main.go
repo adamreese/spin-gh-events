@@ -14,7 +14,6 @@ import (
 // getSecretKey returns the environment variable for SECRET_KEY.  If it's not
 // set it will check the key value store.
 func getSecretKey() (string, error) {
-	log.Print("getSecretKey")
 	if key, ok := os.LookupEnv("SECRET_KEY"); ok {
 		return key, nil
 	}
