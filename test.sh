@@ -20,5 +20,6 @@ curl \
   --header "X-Hub-Signature-256: sha256=${signature}" \
   --header "Content-Type: application/json" \
   --data "${payload}" \
-  -L \
-    "${endpoint}"
+  --location \
+  --fail \
+  "${endpoint}"
