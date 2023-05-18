@@ -3,7 +3,7 @@
 ### Run the app on local machine
 
 ```
-$ spin build --up --env='SECRET_KEY=YOURSECRETKEY'
+$ spin build --up --key-value='webhook_secret=YOURSECRETKEY'
 ```
 
 ### Running the app on Fermyon Cloud
@@ -13,7 +13,7 @@ deploy.
 
 ```
 $ spin build
-$ spin deploy --key-value='webhookSecretKey=YOURSECRETKEY'
+$ spin deploy --key-value='webhook_secret=YOURSECRETKEY'
 ```
 
 You now have an application accepting webhooks from your GitHub repository!

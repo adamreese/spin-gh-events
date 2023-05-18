@@ -4,27 +4,21 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"os"
 
 	spinhttp "github.com/fermyon/spin/sdk/go/http"
 	"github.com/fermyon/spin/sdk/go/key_value"
 	"github.com/google/go-github/v51/github"
 )
 
-// getSecretKey returns the environment variable for SECRET_KEY.  If it's not
-// set it will check the key value store.
-func getSecretKey() (string, error) {
-	if key, ok := os.LookupEnv("SECRET_KEY"); ok {
-		return key, nil
-	}
+func getSecretKey() ([]byte, error) {
 	store, err := key_value.Open("default")
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	defer key_value.Close(store)
 
-	key, err := key_value.Get(store, "webhookSecretKey")
-	return string(key), err
+	key, err := key_value.Get(store, "webhook_secret")
+	return key, err
 }
 
 func init() {
@@ -36,7 +30,7 @@ func init() {
 			return
 		}
 
-		payload, err := github.ValidatePayload(r, []byte(webhookSecretKey))
+		payload, err := github.ValidatePayload(r, webhookSecretKey)
 		if err != nil {
 			log.Print(err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
