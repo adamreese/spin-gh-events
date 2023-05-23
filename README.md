@@ -18,7 +18,7 @@ $ spin deploy --key-value='webhook_secret=YOURSECRETKEY'
 
 You now have an application accepting webhooks from your GitHub repository!
 
-## Testing mock payloads
+## Testing using mock payloads
 
 Use the test script to send mock payloads to your application.
 
